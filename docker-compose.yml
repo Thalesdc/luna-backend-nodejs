@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  app:
+    image: docker-luna-node
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      NODE_ENV: development
+      MONGO_URI: mongodb://app-db:27017/luna-db-dev
+      JWT_SECRET: 'my-secret'
+    ports:
+      - '8089:8089'
+    depends_on:
+      - luna-db
+  luna-db:
+    image: mongo:5.0
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - luna-db-data:/data/db
+volumes:
+  luna-db-data:
