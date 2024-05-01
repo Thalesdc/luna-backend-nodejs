@@ -7,8 +7,13 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "set NODE_ENV=local&& nodemon server.js",
         "start": "node server.js",
-        "build": "NODE_ENV=production node server.js"
+        "build": "NODE_ENV=production node server.js",
+        "lint": "eslint . -f node_modules/eslint-html-reporter/reporter.js -o lint/report.html",
+        "analyse": "yarn run lint"
     },
+    "pre-commit": [
+        "analyse"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/Thalesdc/luna-backend-nodejs.git"
@@ -30,9 +35,12 @@
     },
     "dependencies": {
         "dotenv": "^16.4.5",
+        "eslint-html-reporter": "^0.7.4",
         "express": "^4.19.2",
+        "install": "^0.13.0",
         "jsonwebtoken": "^9.0.2",
         "mongoose": "^8.2.4",
+        "pre-commit": "^1.2.2",
         "prettier": "^3.2.5"
     },
     "prettier": {
